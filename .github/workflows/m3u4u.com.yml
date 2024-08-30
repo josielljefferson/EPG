@@ -1,0 +1,22 @@
+name: Execute m3u4u.com
+
+on:
+  schedule:
+    - cron: "0 8 */3 * *" # Executa a cada 5 dias às 08:00 UTC
+    - cron: "0 12 */3 * *" # Executa a cada 5 dias às 12:00 UTC
+    - cron: "0 16 */3 * *" # Executa a cada 5 dias às 16:00 UTC
+
+jobs:
+  execute-links:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install requests
+    - name: Execute script
+      run: python m3u4u.com.py
